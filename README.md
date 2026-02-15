@@ -1,3 +1,3 @@
 # AI-for-Bharat
-## Design:[[DESIGN.MD]]
-## Requirements:[[REQUIREMENTS.MD]]
+## Design:Design: [DESIGN](DESIGN.md)  
+##Requirements: [REQUIREMENTS](REQUIREMENTS.md)
