@@ -1,197 +1,130 @@
-# REQUIREMENTS DOCUMENT
+# Requirements Document: Team Foundry
 
-## AI Team Formation Assistant (Hackathon MVP)
+## Introduction
 
----
+Team Foundry is an AI-assisted team formation platform that helps entrepreneurs and creators transform a project idea into an executable plan and the right starter team. The system analyzes project ideas and generates structured execution roadmaps with candidate recommendations, while preserving human decision-making throughout the process. This hackathon MVP focuses on the core flow: idea input, AI roadmap generation, candidate recommendation, and human team selection.
 
-## 1. Purpose
+## Glossary
 
-Define the functional and non-functional requirements for a hackathon-scale system that helps a user:
+- **System**: The Team Foundry platform (React frontend with Memstack state management and backend API)
+- **User**: An entrepreneur or creator seeking to form a team for their project
+- **Project_Idea**: A textual description of a product or project the user wants to build
+- **Execution_Roadmap**: A structured plan including project summary, core features, required roles, technology stack, and development phases
+- **Candidate_Profile**: A recommended individual with skills, experience, cost range, and match score
+- **Team_Selection**: The final set of candidates chosen by the user for their project
+- **Match_Score**: A numerical indicator of how well a candidate fits a required role
+- **Required_Role**: A position needed for the project (e.g., frontend developer, designer, product manager)
+- **Memstack**: The state management library used for handling application state and API interactions
 
-* describe a project idea
-* receive an AI-generated execution roadmap
-* view recommended people for required roles
-* select a team while remaining fully in control
+## Requirements
 
-The system removes the **hassle of finding the right collaborators**, without automating hiring or execution.
+### Requirement 1: Project Idea Input
 
----
+**User Story:** As a user, I want to input my project idea in natural language, so that the system can analyze it and generate a roadmap.
 
-## 2. Scope
+#### Acceptance Criteria
 
-### Included in MVP
+1. THE System SHALL provide a text input interface for project idea entry
+2. WHEN a user submits a project idea, THE System SHALL accept text input of at least 50 characters
+3. WHEN a user submits a project idea with fewer than 50 characters, THE System SHALL display a validation message requesting more detail
+4. WHEN a user submits a valid project idea, THE System SHALL proceed to roadmap generation
 
-* Free-form project idea input
-* AI-generated:
+### Requirement 2: AI Roadmap Generation
 
-    * project summary
-    * feature list
-    * required roles
-    * suggested tech stack
-    * rough timeline
-* Recommended candidate list per role
-* Human team selection interface
-* Single-page visual dashboard
-* Clear end-to-end **UX flow from idea → team**
+**User Story:** As a user, I want the system to generate a structured execution roadmap from my idea, so that I have a clear plan for my project.
 
-### Explicitly Excluded
+#### Acceptance Criteria
 
-* Real hiring or contracts
-* Payments or escrow
-* Messaging or collaboration tools
-* Live scraping of freelance platforms
-* Full project management system
+1. WHEN a valid project idea is submitted, THE System SHALL generate an Execution_Roadmap within 30 seconds
+2. THE Execution_Roadmap SHALL include a project summary
+3. THE Execution_Roadmap SHALL include a list of core features
+4. THE Execution_Roadmap SHALL include required roles with descriptions
+5. THE Execution_Roadmap SHALL include a suggested technology stack
+6. THE Execution_Roadmap SHALL include high-level development phases
+7. WHEN roadmap generation fails, THE System SHALL display an error message and allow the user to retry
 
----
+### Requirement 3: Candidate Recommendation
 
-## 3. Functional Requirements
+**User Story:** As a user, I want to see recommended candidates for each required role, so that I can quickly identify potential team members.
 
-### 3.1 Idea Submission
+#### Acceptance Criteria
 
-The system shall:
+1. WHEN an Execution_Roadmap is generated, THE System SHALL recommend at least 3 candidates for each Required_Role
+2. THE System SHALL display each Candidate_Profile with a name
+3. THE System SHALL display each Candidate_Profile with relevant skills
+4. THE System SHALL display each Candidate_Profile with experience indicators
+5. THE System SHALL display each Candidate_Profile with an estimated cost range
+6. THE System SHALL display each Candidate_Profile with a Match_Score between 0 and 100
+7. THE System SHALL source candidates from predefined or publicly available data
+8. THE System SHALL NOT perform live scraping of freelance marketplaces
 
-* Allow textual project description input
-* Validate non-empty input
-* Send idea to backend API
+### Requirement 4: Human Team Selection
 
----
+**User Story:** As a user, I want to select or remove candidates from my team, so that I maintain full control over who I work with.
 
-### 3.2 AI Roadmap Generation
+#### Acceptance Criteria
 
-The backend shall:
+1. WHEN viewing candidate recommendations, THE System SHALL allow the user to select candidates for their team
+2. WHEN viewing candidate recommendations, THE System SHALL allow the user to remove candidates from consideration
+3. WHEN a user selects a candidate, THE System SHALL add that candidate to the Team_Selection
+4. WHEN a user removes a candidate, THE System SHALL remove that candidate from the Team_Selection
+5. THE System SHALL display the current Team_Selection with all selected candidates
+6. THE System SHALL allow the user to modify the Team_Selection at any time during the session
 
-* Send idea to an external language-model inference service
+### Requirement 5: Single-Page Web Experience
 
-* Generate structured output:
+**User Story:** As a user, I want a simple, single-page interface, so that I can complete the entire flow without navigation complexity.
 
-    * summary
-    * features
-    * roles
-    * tech stack
-    * phases
+#### Acceptance Criteria
 
-* Return **structured JSON**
+1. THE System SHALL present all functionality on a single web page
+2. WHEN the user progresses through the flow, THE System SHALL update the page content without full page reloads
+3. THE System SHALL display the idea input interface as the initial view
+4. WHEN roadmap generation completes, THE System SHALL display the roadmap and candidate recommendations
+5. THE System SHALL maintain visual continuity throughout the user flow
 
----
+### Requirement 6: MVP Scope Boundaries
 
-### 3.3 Candidate Recommendation
+**User Story:** As a developer, I want clear scope boundaries for the MVP, so that the hackathon project remains focused and achievable.
 
-For each role, the system shall:
+#### Acceptance Criteria
 
-* Display **3–5 suggested candidates**
-* Show:
+1. THE System SHALL NOT include real hiring functionality
+2. THE System SHALL NOT include payment processing
+3. THE System SHALL NOT include messaging between users and candidates
+4. THE System SHALL NOT include contract management
+5. THE System SHALL NOT include full project management features
+6. THE System SHALL focus exclusively on idea input, roadmap generation, candidate recommendation, and team selection
 
-    * skills
-    * experience indicator
-    * cost estimate
-    * match score
+### Requirement 7: Performance and Responsiveness
 
-Data may be **mock or public**.
-Real scraping is not required.
+**User Story:** As a user, I want the system to respond quickly, so that I can complete the team formation process within one minute.
 
----
+#### Acceptance Criteria
 
-### 3.4 Team Selection
+1. WHEN a user submits a project idea, THE System SHALL generate the complete roadmap and candidate recommendations within 60 seconds
+2. WHEN a user interacts with the interface, THE System SHALL provide visual feedback within 200 milliseconds
+3. WHEN processing is ongoing, THE System SHALL display a loading indicator
+4. THE System SHALL remain responsive during AI processing
 
-User shall:
+### Requirement 8: Data Persistence
 
-* Add/remove candidates
-* View final **selected team**
-* Retain full control
+**User Story:** As a user, I want my roadmap and team selection to be available during my session, so that I don't lose my work.
 
-AI only **recommends**, never auto-assigns.
+#### Acceptance Criteria
 
----
+1. WHEN an Execution_Roadmap is generated, THE System SHALL store it for the duration of the user session
+2. WHEN a user modifies their Team_Selection, THE System SHALL persist those changes for the duration of the session
+3. WHEN a user refreshes the page, THE System SHALL maintain the current roadmap and team selection if the session is still active
+4. THE System SHALL NOT require user authentication for the MVP
 
-### 3.5 Dashboard Visualization
+### Requirement 9: Error Handling and User Feedback
 
-Single-screen display must include:
+**User Story:** As a user, I want clear feedback when something goes wrong, so that I understand what happened and how to proceed.
 
-* Project overview
-* Feature roadmap
-* Required roles
-* Recommended candidates
-* Selected team
+#### Acceptance Criteria
 
----
-
-## 4. UX Flow Requirements
-
-### Step-by-Step User Journey
-
-1. **Landing / Input**
-
-    * User enters project idea
-    * Clicks *Generate*
-
-2. **Processing State**
-
-    * Loading indicator shows AI thinking
-    * Prevents duplicate submissions
-
-3. **Results Dashboard**
-
-    * Roadmap appears first
-    * Roles displayed next
-    * Candidate cards shown per role
-
-4. **Team Selection**
-
-    * User clicks **Add to Team**
-    * Selected team panel updates live
-
-5. **Completion State**
-
-    * User sees final starter team
-    * Ready for real-world execution outside MVP
-
-Total interaction steps ≤ **3 major actions**.
-
----
-
-## 5. Non-Functional Requirements
-
-### Performance
-
-* Generation ≤ **60 seconds**
-* UI response ≤ **2 seconds**
-
-### Reliability
-
-* Graceful AI/network failure handling
-* Clear error messages
-* No crashes
-
-### Usability
-
-* Minimal learning curve
-* Clear visual hierarchy
-* Guided linear UX flow
-
-### Security (Hackathon Level)
-
-* No sensitive data storage
-* API keys via environment variables
-* Basic validation
-
-### Deployability
-
-* Container-ready backend
-* Cloud-compatible configuration
-
----
-
-## 6. Acceptance Criteria
-
-A user can:
-
-1. Enter an idea
-2. Receive roadmap
-3. View recommended people
-4. Select a team
-
-All within **one minute**.
-
----
-
-**End of Requirements Document**
+1. WHEN an error occurs during roadmap generation, THE System SHALL display a user-friendly error message
+2. WHEN an error occurs, THE System SHALL provide actionable guidance for recovery
+3. WHEN validation fails, THE System SHALL highlight the specific issue and suggest corrections
+4. THE System SHALL log errors for debugging purposes without exposing technical details to users
