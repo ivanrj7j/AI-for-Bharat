@@ -2,47 +2,47 @@
 
 ## AI Team Formation Assistant (Hackathon MVP)
 
-------------------------------------------------------------------------
+---
 
 ## 1. Purpose
 
-Define the functional and non-functional requirements for a
-hackathon-scale system that helps a user:
+Define the functional and non-functional requirements for a hackathon-scale system that helps a user:
 
--   describe a project idea\
--   receive an AI-generated execution roadmap\
--   view recommended people for required roles\
--   select a team while remaining fully in control
+* describe a project idea
+* receive an AI-generated execution roadmap
+* view recommended people for required roles
+* select a team while remaining fully in control
 
-The system focuses on removing the hassle of finding the right
-collaborators, not automating hiring or execution.
+The system removes the **hassle of finding the right collaborators**, without automating hiring or execution.
 
-------------------------------------------------------------------------
+---
 
 ## 2. Scope
 
 ### Included in MVP
 
--   Free-form project idea input\
--   AI-generated:
-    -   project summary\
-    -   feature list\
-    -   required roles\
-    -   suggested tech stack\
-    -   rough timeline\
--   Recommended candidate list per role\
--   Human team selection interface\
--   Single-page visual dashboard
+* Free-form project idea input
+* AI-generated:
+
+    * project summary
+    * feature list
+    * required roles
+    * suggested tech stack
+    * rough timeline
+* Recommended candidate list per role
+* Human team selection interface
+* Single-page visual dashboard
+* Clear end-to-end **UX flow from idea → team**
 
 ### Explicitly Excluded
 
--   Real hiring or contracts\
--   Payment or escrow systems\
--   Messaging or collaboration tools\
--   Live scraping of freelance platforms\
--   Full project management features
+* Real hiring or contracts
+* Payments or escrow
+* Messaging or collaboration tools
+* Live scraping of freelance platforms
+* Full project management system
 
-------------------------------------------------------------------------
+---
 
 ## 3. Functional Requirements
 
@@ -50,107 +50,148 @@ collaborators, not automating hiring or execution.
 
 The system shall:
 
--   Allow a user to enter a textual project description\
--   Validate that input is non-empty\
--   Send the idea to a backend API for processing
+* Allow textual project description input
+* Validate non-empty input
+* Send idea to backend API
 
-------------------------------------------------------------------------
+---
 
 ### 3.2 AI Roadmap Generation
 
 The backend shall:
 
--   Send the idea to an external language-model inference service\
--   Generate structured output containing:
-    -   project summary\
-    -   core features\
-    -   required roles\
-    -   suggested technology stack\
-    -   estimated development phases
--   Return the result as structured JSON
+* Send idea to an external language-model inference service
 
-------------------------------------------------------------------------
+* Generate structured output:
+
+    * summary
+    * features
+    * roles
+    * tech stack
+    * phases
+
+* Return **structured JSON**
+
+---
 
 ### 3.3 Candidate Recommendation
 
-For each required role, the system shall:
+For each role, the system shall:
 
--   Display 3--5 suggested candidates\
--   Show:
-    -   skills or specialization\
-    -   experience indicator\
-    -   estimated cost range\
-    -   match score
+* Display **3–5 suggested candidates**
+* Show:
 
-Candidate data may be predefined mock data or sourced from publicly
-available developer platforms.
+    * skills
+    * experience indicator
+    * cost estimate
+    * match score
 
-------------------------------------------------------------------------
+Data may be **mock or public**.
+Real scraping is not required.
+
+---
 
 ### 3.4 Team Selection
 
-The user shall be able to:
+User shall:
 
--   Add or remove suggested candidates\
--   View a final selected team list\
--   Retain full decision-making control
+* Add/remove candidates
+* View final **selected team**
+* Retain full control
 
-The AI shall only recommend, not auto-assign.
+AI only **recommends**, never auto-assigns.
 
-------------------------------------------------------------------------
+---
 
 ### 3.5 Dashboard Visualization
 
-The frontend shall present on a single screen:
+Single-screen display must include:
 
--   Project overview\
--   Feature roadmap\
--   Required roles\
--   Recommended candidates\
--   Selected team
+* Project overview
+* Feature roadmap
+* Required roles
+* Recommended candidates
+* Selected team
 
-------------------------------------------------------------------------
+---
 
-## 4. Non-Functional Requirements
+## 4. UX Flow Requirements
+
+### Step-by-Step User Journey
+
+1. **Landing / Input**
+
+    * User enters project idea
+    * Clicks *Generate*
+
+2. **Processing State**
+
+    * Loading indicator shows AI thinking
+    * Prevents duplicate submissions
+
+3. **Results Dashboard**
+
+    * Roadmap appears first
+    * Roles displayed next
+    * Candidate cards shown per role
+
+4. **Team Selection**
+
+    * User clicks **Add to Team**
+    * Selected team panel updates live
+
+5. **Completion State**
+
+    * User sees final starter team
+    * Ready for real-world execution outside MVP
+
+Total interaction steps ≤ **3 major actions**.
+
+---
+
+## 5. Non-Functional Requirements
 
 ### Performance
 
--   Roadmap generation time ≤ 60 seconds\
--   UI interaction latency ≤ 2 seconds
+* Generation ≤ **60 seconds**
+* UI response ≤ **2 seconds**
 
 ### Reliability
 
--   Graceful handling of AI or network failures\
--   Clear user-visible error messages\
--   No full application crash from malformed responses
+* Graceful AI/network failure handling
+* Clear error messages
+* No crashes
 
 ### Usability
 
--   ≤ 3 steps from idea to team view\
--   Clear visual hierarchy\
--   Minimal learning curve
+* Minimal learning curve
+* Clear visual hierarchy
+* Guided linear UX flow
 
 ### Security (Hackathon Level)
 
--   No storage of sensitive personal data\
--   API keys stored in environment variables\
--   Basic request validation
+* No sensitive data storage
+* API keys via environment variables
+* Basic validation
 
 ### Deployability
 
--   Containerized backend deployment\
--   Cloud hosting compatibility\
--   Environment-based configuration
+* Container-ready backend
+* Cloud-compatible configuration
 
-------------------------------------------------------------------------
+---
 
-## 5. Acceptance Criteria
+## 6. Acceptance Criteria
 
 A user can:
 
-1.  Enter a project idea\
-2.  Receive an AI-generated roadmap\
-3.  View recommended people for each role\
-4.  Select a team
+1. Enter an idea
+2. Receive roadmap
+3. View recommended people
+4. Select a team
 
-All within one minute.
+All within **one minute**.
+
+---
+
+**End of Requirements Document**
